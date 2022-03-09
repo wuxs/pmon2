@@ -2,10 +2,11 @@ package model
 
 import (
 	"encoding/json"
-	"github.com/ntt360/pmon2/app/utils/cpu"
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/ntt360/pmon2/app/utils/cpu"
 )
 
 const (
@@ -25,6 +26,7 @@ type Process struct {
 	Log         string      `gorm:"column:log" json:"log"`
 	Name        string      `json:"name"`
 	ProcessFile string      `json:"process_file"`
+	WorkingDir  string      `json:"working_dir"`
 	Args        string      `json:"args"`
 	Status      string      `json:"status"`
 	Pointer     *os.Process `gorm:"-" json:"-"`

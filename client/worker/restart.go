@@ -3,12 +3,13 @@ package worker
 import (
 	"errors"
 	"fmt"
+	"time"
+
 	"github.com/ntt360/pmon2/app"
 	"github.com/ntt360/pmon2/app/executor"
 	"github.com/ntt360/pmon2/app/model"
 	process2 "github.com/ntt360/pmon2/app/svc/process"
 	"github.com/ntt360/pmon2/client/service"
-	"time"
 )
 
 func Restart(pFile string, flags *model.ExecFlags) (string, error) {
@@ -43,7 +44,7 @@ func Restart(pFile string, flags *model.ExecFlags) (string, error) {
 		return "", nil
 	}
 
-	process, err := executor.Exec(m.ProcessFile, m.Log, m.Name, m.Args, runUser, !flags.NoAutoRestart)
+	process, err := executor.Exec(m.ProcessFile, m.Log, m.Name, m.Args, m.WorkingDir, runUser, !flags.NoAutoRestart)
 	if err != nil {
 		return "", err
 	}

@@ -1,11 +1,13 @@
 package exec
 
 import (
+	"os"
+	"path/filepath"
+
 	"github.com/ntt360/pmon2/app"
 	"github.com/ntt360/pmon2/app/model"
 	"github.com/ntt360/pmon2/app/output"
 	"github.com/spf13/cobra"
-	"os"
 )
 
 // process failed auto restart
@@ -19,7 +21,7 @@ var Cmd = &cobra.Command{
 		if len(args) <= 0 {
 			app.Log.Fatal("porcess params is empty")
 		}
-
+		flag.Dir, _ = filepath.Abs(flag.Dir)
 		cmdRun(args, flag.Json())
 	},
 }
@@ -29,6 +31,7 @@ func init() {
 	Cmd.Flags().StringVarP(&flag.User, "user", "u", "", "the process run user")
 	Cmd.Flags().StringVarP(&flag.Log, "log", "l", "", "the process stdout log")
 	Cmd.Flags().StringVarP(&flag.Args, "args", "a", "", "the process extra arguments")
+	Cmd.Flags().StringVarP(&flag.Dir, "dir", "d", ".", "working directory")
 	Cmd.Flags().StringVar(&flag.Name, "name", "", "run process name")
 }
 

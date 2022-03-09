@@ -3,13 +3,14 @@ package worker
 import (
 	"errors"
 	"fmt"
+	"os"
+	"path/filepath"
+	"time"
+
 	"github.com/ntt360/pmon2/app"
 	"github.com/ntt360/pmon2/app/executor"
 	"github.com/ntt360/pmon2/app/model"
 	"github.com/ntt360/pmon2/client/service"
-	"os"
-	"path/filepath"
-	"time"
 )
 
 func Start(processFile string, flags *model.ExecFlags) (string, error) {
@@ -25,7 +26,7 @@ func Start(processFile string, flags *model.ExecFlags) (string, error) {
 		return "", nil
 	}
 
-	name :=  flags.Name
+	name := flags.Name
 	// get process file name
 	if len(name) <= 0 {
 		name = filepath.Base(processFile)
@@ -37,7 +38,7 @@ func Start(processFile string, flags *model.ExecFlags) (string, error) {
 	}
 
 	// start process
-	process, err := executor.Exec(processFile, flags.Log, name, flags.Args, runUser, !flags.NoAutoRestart)
+	process, err := executor.Exec(processFile, flags.Log, name, flags.Args, flags.Dir, runUser, !flags.NoAutoRestart)
 	if err != nil {
 		return "", err
 	}
