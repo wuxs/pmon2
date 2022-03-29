@@ -7,16 +7,19 @@ import (
 	"github.com/ntt360/pmon2/client/cmd/desc"
 	"github.com/ntt360/pmon2/client/cmd/exec"
 	"github.com/ntt360/pmon2/client/cmd/list"
+	"github.com/ntt360/pmon2/client/cmd/logs"
 	"github.com/ntt360/pmon2/client/cmd/reload"
 	"github.com/ntt360/pmon2/client/cmd/start"
 	"github.com/ntt360/pmon2/client/cmd/stop"
 	"github.com/spf13/cobra"
 )
 
-
 var rootCmd = &cobra.Command{
 	Use:   "pmon2",
 	Short: "pmon2 client cli",
+	Run: func(cmd *cobra.Command, args []string) {
+		cmd.Help()
+	},
 }
 
 var verCmd = &cobra.Command{
@@ -35,6 +38,7 @@ func Exec() error {
 		stop.Cmd,
 		reload.Cmd,
 		start.Cmd,
+		logs.Cmd,
 		verCmd,
 	)
 
