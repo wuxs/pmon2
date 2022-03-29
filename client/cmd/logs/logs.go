@@ -3,10 +3,10 @@ package logs
 import (
 	"fmt"
 
-	"github.com/hpcloud/tail"
 	"github.com/jinzhu/gorm"
 	"github.com/ntt360/pmon2/app"
 	"github.com/ntt360/pmon2/app/model"
+	"github.com/nxadm/tail"
 	"github.com/spf13/cobra"
 )
 
